@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518184251) do
+ActiveRecord::Schema.define(:version => 20110518184812) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(:version => 20110518184251) do
     t.datetime "updated_at"
   end
 
-# Could not dump table "webhook_events" because of following StandardError
-#   Unknown type 'event_type' for column 'type'
+  create_table "webhook_events", :force => true do |t|
+    t.string "event_type"
+    t.string "description"
+  end
 
 end
