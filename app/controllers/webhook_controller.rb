@@ -1,20 +1,18 @@
 class WebhookController < ApplicationController
 
   def product_new
-    product = ActiveSupport::JSON.decode(request.body)
-    puts product.id
+    event = webhook_event.new(:type => "product new", :description => request.body)
+    event.save
   end
 
   def product_updated
-    product = ActiveSupport::JSON.decode(request.body)
-    logger.fatal product
-    db_product = Product.new(:name => product[:title])
-    db_product.save
+    event = webhook_event.new(:type => "product update", :description => request.body)
+    event.save
   end
 
   def product_deleted
-    product = ActiveSupport::JSON.decode(request.body)
-    puts product.id
+    event = webhook_event.new(:type => "product delete", :description => request.body)
+    event.save
   end
 
 end
