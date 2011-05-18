@@ -7,7 +7,7 @@ end
 
 def product_updated
 product = ActiveSupport::JSON.decode(request.body)
-puts product
+puts product.id
 end
 
 def product_deleted
