@@ -88,11 +88,7 @@
     <div class="product box">
       <div class="wrapper">
 
-        <h4><%= link_to product.title, "https://#{current_shop.url}/admin/products/#{product.id}" %></h4>
-
-        <p class="price"><%= product.price_range %> <%= current_shop.shop.currency %></p>
-        <p style="margin-bottom: 0"><%= product.product_type %> <span class="note">type</span></p>
-        <p style="margin: 0"><%= product.vendor %> <span class="note">vendor</span></p>
+        <h4><%= product.name %></h4>
       
         <div style="clear:left"></div>
       </div>
