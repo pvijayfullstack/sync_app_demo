@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   
   def index
     # get 3 products
-    @products = get_products
+    #@products = get_products
 
     # get latest 3 orders
     @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 3, :order => "created_at DESC" })
