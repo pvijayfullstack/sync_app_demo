@@ -49,23 +49,21 @@
 
 
 <div id="orders">
-  <h2>Your recent orders</h2>
+  <h2>Webhook events</h2>
 
-  <% if @orders.blank? %>  
+  <% if @webhook_events.blank? %>  
 
-    <em class="note">There are no orders in your store.</em>
+    <em class="note">There are no webhook events.</em>
 
   <% else %>
 
     <ul>
-    <% @orders.each do |order| %>
+    <% @webhook_events.each do |webhook_event| %>
       <li>
         <div class="order box">
           <div class="wrapper">
-            <strong><%= link_to order.name, "https://#{current_shop.url}/admin/orders/#{order.id}" %></strong>
-            <span class="price"><%= order.total_price %> <%= order.currency %></span>
-            <span class="highlight"><%= order.financial_status %></span>
-            by <span class="note"><%= order.billing_address.name %></span>
+            <strong><%=  webhook_event.type %></strong>
+            <span class="price"><%= webhook_event.description %></span>
           </div>
         </div>
       </li>
@@ -74,25 +72,3 @@
 
   <% end %>
 </div>
-
-
-<h2>Some of your products</h2>
-
-<% if @products.blank? %>
-
-  <em class="note">There are no products in your store.</em>
-
-<% else %>
-
-  <% @products.each do |product| %>
-    <div class="product box">
-      <div class="wrapper">
-
-        <h4><%= product.name %></h4>
-      
-        <div style="clear:left"></div>
-      </div>
-    </div>
-  <% end %>
-
-<% end %>
