@@ -7,7 +7,7 @@ class WebhookController < ApplicationController
 
   def product_updated
     product = ActiveSupport::JSON.decode(request.body)
-    db_product = Product.new(:name => product.name, :price => product.variants[0].price)
+    db_product = Product.new(:name => product.title, :price => product.variants[0].price)
     db_product.save
   end
 
