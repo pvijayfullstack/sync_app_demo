@@ -3,10 +3,11 @@ class WebhookController < ApplicationController
   def product_new
     data = ActiveSupport::JSON.decode(request.body)
     if Product.where('shopify_id = ?', data["id"]).first == nil
-      product = Product.new(:name => data["title"], :shopify_id => data["id"])
-      product.save
-      event = WebhookEvent.new(:event_type => "product new", :product => product)
+      event = WebhookEvent.new(:event_type => "product new")
       event.save
+      product = Product.new(:name => data["title"], :shopify_id => data["id"])
+      product.webhook_events << event
+      product.save
     end
     render_success
   end
@@ -15,10 +16,11 @@ class WebhookController < ApplicationController
     data = ActiveSupport::JSON.decode(request.body)
     product = Product.where('shopify_id = ?', data["id"]).first
     if product != nil
-      product.name = data["title"]
-      product.save
       event = WebhookEvent.new(:event_type => "product update", :product => product)
       event.save
+      product.name = data["title"]
+      product.webhook_events << event
+      product.save
     end
     render_success
   end
@@ -26,11 +28,12 @@ class WebhookController < ApplicationController
   def product_deleted
     data = ActiveSupport::JSON.decode(request.body)
     if Product.where('shopify_id = ?', data["id"]).first != nil
-      product = Product.where('shopify_id = ?', data["id"]).first
-      product.logical_delete = true
-      product.save
       event = WebhookEvent.new(:event_type => "product delete", :product => product)
       event.save
+      product = Product.where('shopify_id = ?', data["id"]).first
+      product.logical_delete = true
+      product.webhook_events << event
+      product.save
     end
     render_success
   end
