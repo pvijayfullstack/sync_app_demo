@@ -12,7 +12,7 @@ class WebhookController < ApplicationController
   end
 
   def product_updated
-    data = ActiveSupport::JSON.decode(response.body)
+    data = ActiveSupport::JSON.decode(request.body)
     product = Product.where('shopify_id = ?', data["id"]).first
     if product != nil
       product.name = data["title"]
@@ -24,7 +24,7 @@ class WebhookController < ApplicationController
   end
 
   def product_deleted
-    data = ActiveSupport::JSON.decode(response.body)
+    data = ActiveSupport::JSON.decode(request.body)
     if Product.where('shopify_id = ?', data["id"]).first != nil
       product = Product.where('shopify_id = ?', data["id"]).first
       product.logical_delete = true
