@@ -10,7 +10,7 @@ class HomeController < ApplicationController
   def index
     
     @webhook_events = WebhookEvent.limit(10).order('id DESC')
-    @products = Product.all
+    @products = Product.where('logical_delete IS NULL')
 
   end
   
