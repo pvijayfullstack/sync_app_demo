@@ -11,7 +11,7 @@ class WebhookController < ApplicationController
 
   def product_updated
     data = ActiveSupport::JSON.decode(response.body)
-    if product = Product.where('shopify_id = ?', data["id"]) do
+    if product = Product.where('shopify_id = ?', data["id"])
       product.name = data["title"]
       product.save
       event = WebhookEvent.new(:event_type => "product update", :product => product)
