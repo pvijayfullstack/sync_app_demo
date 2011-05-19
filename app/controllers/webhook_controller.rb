@@ -8,7 +8,7 @@ class WebhookController < ApplicationController
       event = WebhookEvent.new(:event_type => "product new", :product => product)
       event.save
     end
-    render :status => 200
+    render_success
   end
 
   def product_updated
@@ -20,7 +20,7 @@ class WebhookController < ApplicationController
       event = WebhookEvent.new(:event_type => "product update", :product => product)
       event.save
     end
-    render :status => 200
+    render_success
   end
 
   def product_deleted
@@ -32,7 +32,7 @@ class WebhookController < ApplicationController
       event = WebhookEvent.new(:event_type => "product delete", :product => product)
       event.save
     end
-    render :status => 200
+    render_success
   end
 
 end
