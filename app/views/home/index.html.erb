@@ -48,7 +48,7 @@
 </div>
 
 
-<div id="orders">
+<div id="webhooks">
   <h2>Webhook events</h2>
 
   <% if @webhook_events.blank? %>  
@@ -64,6 +64,31 @@
           <div class="wrapper">
             <strong><%=  webhook_event.event_type %></strong>
             <span class="price"><%= webhook_event.description %></span>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+
+  <% end %>
+</div>
+
+<div id="products">
+  <h2>Products</h2>
+
+  <% if @products.blank? %>  
+
+    <em class="note">There are no products.</em>
+
+  <% else %>
+
+    <ul>
+    <% @products.each do |product| %>
+      <li>
+        <div class="order box">
+          <div class="wrapper">
+            <strong><%=  product.name %></strong>
+            <span class="price"><%= product.shopify_id %></span>
           </div>
         </div>
       </li>

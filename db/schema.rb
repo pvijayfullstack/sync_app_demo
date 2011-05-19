@@ -10,18 +10,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518184812) do
+ActiveRecord::Schema.define(:version => 20110519143129) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
     t.string   "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shopify_id"
+    t.boolean  "logical_delete"
   end
 
   create_table "webhook_events", :force => true do |t|
-    t.string "event_type"
-    t.string "description"
+    t.string  "event_type"
+    t.text    "description",    :limit => 255
+    t.integer "product_id"
+    t.boolean "logical_delete"
   end
 
 end

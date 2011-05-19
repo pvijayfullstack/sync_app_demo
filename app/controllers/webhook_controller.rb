@@ -1,17 +1,28 @@
 class WebhookController < ApplicationController
 
   def product_new
-    event = WebhookEvent.new(:event_type => "product new", :description => ActiveSupport::JSON.decode(request.body).to_yaml)
+    data = ActiveSupport::JSON.decode(request.body)
+    product = Product.new(:name => data.title, :shopify_id => data.id)
+    product.save
+    event = WebhookEvent.new(:event_type => "product new", :product => product)
     event.save
   end
 
   def product_updated
-    event = WebhookEvent.new(:event_type => "product update", :description => ActiveSupport::JSON.decode(request.body).to_yaml)
+    data = ActiveSupport::JSON.decode(response.body)
+    product = Product.where('shopify_id = ?', data.id)
+    product.name = data.title
+    product.save
+    event = WebhookEvent.new(:event_type => "product update", :product => product)
     event.save
   end
 
   def product_deleted
-    event = WebhookEvent.new(:event_type => "product delete", :description => ActiveSupport::JSON.decode(request.body).to_yaml)
+    data = ActiveSupport::JSON.decode(response.body)
+    product = Product.where('shopify_id = ?', data.id)
+    product.logical_delete = true
+    product.save
+    event = WebhookEvent.new(:event_type => "product delete", :product => product)
     event.save
   end
 
