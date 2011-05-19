@@ -63,7 +63,9 @@
         <div class="order box">
           <div class="wrapper">
             <strong><%=  webhook_event.event_type %></strong>
-            <span class="price"><%= webhook_event.description %></span>
+            <span><%= webhook_event.product.shopify_id %></span>
+            <span><%= webhook_event.created_at %></span>
+            
           </div>
         </div>
       </li>
