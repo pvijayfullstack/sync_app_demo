@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110519143129) do
+ActiveRecord::Schema.define(:version => 20110519173511) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
@@ -22,10 +22,12 @@ ActiveRecord::Schema.define(:version => 20110519143129) do
   end
 
   create_table "webhook_events", :force => true do |t|
-    t.string  "event_type"
-    t.text    "description",    :limit => 255
-    t.integer "product_id"
-    t.boolean "logical_delete"
+    t.string   "event_type"
+    t.text     "description",    :limit => 255
+    t.integer  "product_id"
+    t.boolean  "logical_delete"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
