@@ -8,13 +8,10 @@ class HomeController < ApplicationController
   end
   
   def index
-    # get 3 products
-    #@products = get_products
     
     @webhook_events = WebhookEvent.limit(10).order('id DESC')
+    @products = Product.all
 
-    # get latest 3 orders
-    @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 3, :order => "created_at DESC" })
   end
   
   
