@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110519173511) do
+ActiveRecord::Schema.define(:version => 20110526204707) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(:version => 20110519173511) do
     t.datetime "updated_at"
     t.integer  "shopify_id"
     t.boolean  "logical_delete"
+    t.integer  "shop_id"
+  end
+
+  create_table "shops", :force => true do |t|
+    t.string   "name"
+    t.boolean  "installed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "url"
   end
 
   create_table "webhook_events", :force => true do |t|
@@ -28,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110519173511) do
     t.boolean  "logical_delete"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shop_id"
   end
 
 end
