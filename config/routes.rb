@@ -5,8 +5,6 @@ SyncApp::Application.routes.draw do
 
   match 'welcome'            => 'home#welcome'
 
-  match 'design'             => 'home#design'
-
   match 'login'              => 'login#index'
 
   match 'login/authenticate' => 'login#authenticate'
@@ -15,9 +13,9 @@ SyncApp::Application.routes.draw do
 
   match 'login/logout'       => 'login#logout'
   
-  match 'webhooks/product/new' => 'webhook#product_new'
-  match 'webhooks/product/updated' => 'webhook#product_updated'
-  match 'webhooks/product/deleted' => 'webhook#product_deleted'
+  match 'webhooks/products/new' => 'webhook#product_new'
+  match 'webhooks/products/update' => 'webhook#product_updated'
+  match 'webhooks/products/delete' => 'webhook#product_deleted'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
