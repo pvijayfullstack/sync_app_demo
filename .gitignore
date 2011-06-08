@@ -2,3 +2,5 @@
 db/*.sqlite3
 log/*.log
 tmp/
+config/init.rb
+config/initializers/application_constants.rb
